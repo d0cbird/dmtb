@@ -45,13 +45,13 @@ client.on('message', async message => {
 
 	if (command === 'balance') {
     const target = message.mentions.users.first() || message.author;
-  return message.channel.send(`${target.tag} has ${currency.getBalance(target.id)} bumps`);
+  return message.channel.send(`${target.tag} has ${currency.getBalance(target.id)} currencyname`); //Input the name of the currency in this line
 	} else if (command === 'leaderboard') {
     return message.channel.send(
     	currency.sort((a, b) => b.balance - a.balance)
     		.filter(user => client.users.cache.has(user.user_id))
     		.first(10)
-    		.map((user, position) => `(${position + 1}) ${(client.users.cache.get(user.user_id).tag)}: ${user.balance} bumps`)
+    		.map((user, position) => `(${position + 1}) ${(client.users.cache.get(user.user_id).tag)}: ${user.balance} currencyname`) //Input the name of the currency in this line
     		.join('\n'),
     	{ code: true }
     );
@@ -60,10 +60,10 @@ client.on('message', async message => {
 //Message scraping function
 scraper()
   function scraper(){client.once('message', message => {
-  if (message.content === '!d bump') {
+  if (message.content === 'the-string-you-want-tracked-here') {
     currency.add(message.author.id, 1)
-		setTimeout(() => scraper(), 7200000)} //If message is d! bump reward with 1 currency
-	else scraper() //If message isnt !d bump run the function scraper
+		setTimeout(() => scraper(), 7200000)} //If message is true reward with 1 currency and set timer in ms
+	else scraper()
 })};
 
 client.login('your-token-here');
